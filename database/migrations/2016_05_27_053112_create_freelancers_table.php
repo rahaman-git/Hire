@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class CreateFreelancersTable extends Migration
 {
@@ -14,9 +16,11 @@ class CreateFreelancersTable extends Migration
     {
         Schema::create('freelancers', function (Blueprint $table) {
             $table->increments('id');
-            $table->String('name');
-            $table->text('description');
-            $table->timestamps('created_at');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->rememberToken();
+            $table->timestamps();
         });
     }
 
@@ -27,6 +31,9 @@ class CreateFreelancersTable extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::drop('freelancers');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+
     }
 }

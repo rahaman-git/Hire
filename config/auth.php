@@ -45,6 +45,12 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+
+        //For Freelancers
+        'freelancers' => [
+            'driver' => 'session',
+            'provider' => 'freelancers'
+        ],
     ],
 
     /*
@@ -74,6 +80,12 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+
+        //For freelancers
+        'freelancers' => [
+            'driver' => 'eloquent',
+            'model' => App\Freelancer::class,
+        ],
     ],
 
     /*
@@ -98,6 +110,14 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'email' => 'auth.emails.password',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+
+        //For freelancers
+        'freelancers' => [
+            'provider' => 'freelancers',
             'email' => 'auth.emails.password',
             'table' => 'password_resets',
             'expire' => 60,
